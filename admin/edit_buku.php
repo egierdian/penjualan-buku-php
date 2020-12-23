@@ -93,7 +93,7 @@ if (isset($_GET['id'])) {
                 <nav>
                     <ul class="nav">
                         <li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                        <li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
+                        <li><a href="buku.php" class="active"><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
                         <li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
                         <li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
