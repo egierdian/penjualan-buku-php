@@ -11,6 +11,24 @@
     <li>Template Klorofil</li>
 </ul>
 
+<h4>Fitur</h4>
+<h5>Dashboard admin</h5>
+<ul>
+    <li>Memberikan data transaksi penjualan</li>
+</ul>
+<h5>Kelola data buku</h5>
+<ul>
+    <li>Melakukan penambahan data buku</li>
+    <li>Merubah data buku</li>
+    <li>Menghapus data buku</li>
+    <li>Pencarian data buku</li>
+</ul>
+<h5>Kelola Transaksi</h5>
+<ul>
+    <li>Melakukan penambahan data transaksi</li>
+    <li>Dapat menambahkan beberapa produk buku sekali transaksi</li>
+</ul>
+<br />
 <h5>Login</h5>
 <img src="https://user-images.githubusercontent.com/24710799/102681868-8b9d4700-41f7-11eb-8e0d-82c399b3a4e8.png">
 
