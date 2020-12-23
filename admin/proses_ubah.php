@@ -29,8 +29,8 @@ if($judul == "" || $penerbit == "" || $pengarang== "" || $tahun == "" || $harga=
             $uploaded = "C:/xampp/htdocs/php/penjualan-buku/gambar/";
             move_uploaded_file($file_tmp, $uploaded.$nama_gambar_baru);
             // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-            $query = "UPDATE buku SET judul='$judul', penerbit='$penerbit', pengarang='$pengarang', tahun_terbit='$tahun', harga='$harga', stok='$stok', gambar='$nama_gambar_baru')";
-            $query.= "WHERE ID = '$id'";
+            $query = "UPDATE buku SET judul='$judul', penerbit='$penerbit', pengarang='$pengarang', tahun_terbit='$tahun', harga='$harga', stok='$stok', gambar='$nama_gambar_baru'";
+            $query.= "WHERE ID = $id";
             $result = mysqli_query($koneksi, $query);
             // periska query apakah ada error
             if (!$result) {
@@ -50,7 +50,7 @@ if($judul == "" || $penerbit == "" || $pengarang== "" || $tahun == "" || $harga=
         }
     } else {
         $query = "UPDATE buku SET judul='$judul', penerbit='$penerbit', pengarang='$pengarang', tahun_terbit='$tahun', harga='$harga', stok='$stok'";
-        $query.= "WHERE ID = '$id'";
+        $query.= "WHERE ID = $id";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
         if (!$result) {

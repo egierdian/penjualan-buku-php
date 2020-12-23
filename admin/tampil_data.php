@@ -14,7 +14,7 @@ $noTransaksi = $char . sprintf("%03s", $noUrut);
 $queryData = "SELECT buku.judul as dataBuku, detail_transaksi.jumlah_beli as dataQty, detail_transaksi.subtotal as dataSubtotal from detail_transaksi INNER JOIN buku";
 $queryData.= "on detail_transaksi.ID_buku = buku.ID WHERE no_transaksi='$noTransaksi'";
 $result = mysqli_query($koneksi, $queryData);
-while($row=mysql_fetch_array($queryData)){
+while($row=mysqli_fetch_array($queryData)){
 ?>
 <tbody>
     <tr>

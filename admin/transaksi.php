@@ -5,7 +5,7 @@ session_start();
 include 'konfig.php';
 include 'cek.php';
 
-function format_ribuan($nilai)
+function rupiah($nilai)
 {
 	return number_format($nilai, 0, ',', '.');
 }
@@ -13,7 +13,7 @@ function format_ribuan($nilai)
 ?>
 
 <head>
-	<title>Tables | Klorofil - Free Bootstrap Dashboard Template</title>
+    <title>Erdian-Books | Aplikasi Sistem Administrasi Penjualan Buku</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -40,7 +40,7 @@ function format_ribuan($nilai)
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.php"><img src="../assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="index.php"><img src="../assets/img/logo.png" alt="Erdian-Books" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -72,7 +72,7 @@ function format_ribuan($nilai)
 				<nav>
 					<ul class="nav">
 						<li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="buku.php" class=""><i class="lnr lnr-file-empty"></i> <span>Buku</span></a></li>
+						<li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
 						<li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
 						<li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 					</ul>
@@ -121,6 +121,7 @@ function format_ribuan($nilai)
 										<div class="form-group col-lg-6">
 											<label>Judul Buku</label>
 											<select class="form-control" name="id_buku" onchange="changeValue(this.value)">
+												<option value="0">-- Pilih --</option>
 												<?php
 												//Perintah sql untuk menampilkan semua data pada tabel jurusan
 												$queryJudul = "select * from buku ORDER BY judul asc";
@@ -149,21 +150,21 @@ function format_ribuan($nilai)
 										</script>
 										<div class="form-group col-lg-6">
 											<label>Pengarang</label>
-											<input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" readonly>
+											<input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" readonly required="">
 										</div>
 										<div class="form-group col-lg-6">
 											<label>Penerbit</label>
-											<input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Penerbit" readonly>
+											<input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Penerbit" readonly required="">
 										</div>
 										<div class="form-group col-lg-6">
 											<label>Harga</label>
-											<input type="text" id="harga" class="form-control" name="harga" onkeyup="sum();" placeholder="harga" readonly>
+											<input type="text" id="harga" class="form-control" name="harga" onkeyup="sum();" placeholder="harga" readonly  required="">
 										</div>
 
 										<!-- Inputan -->
 										<div class="form-group col-lg-6">
 											<label>QTY</label>
-											<input type="text" id="qty" class="form-control" name="qty" placeholder="10" onkeyup="sum();">
+											<input type="text" id="qty" class="form-control" name="qty" placeholder="10" onkeyup="sum();" onkeypress="return hanyaAngka(event);">
 										</div>
 
 										<script>
@@ -181,11 +182,11 @@ function format_ribuan($nilai)
 
 										<div class="form-group col-lg-6">
 											<label>Sub-total</label>
-											<input type="text" class="form-control" id="subtotal" name="subtotal" placeholder="subtotal" readonly>
+											<input type="text" class="form-control" id="subtotal" name="subtotal" placeholder="subtotal" readonly  required="">
 										</div>
 
 										<div class="form-group col-lg-12">
-											<button id="tambah" type="submit" class="btn btn-dark btn-lg btn-block">Tambah</button>
+											<button id="tambah" type="submit" class="btn btn-dark btn-lg btn-block"><i class="fa fa-plus"></i> Tambah</button>
 										</div>
 										<div class="panel">
 											<table class="table table-hover">
@@ -208,7 +209,7 @@ function format_ribuan($nilai)
 															<td><?php echo $baris['dataQty']; ?></td>
 															<td><?php echo $baris['dataSubtotal']; ?></td>
 															<td style="width: 70px; text-align:center;">
-															<a id="hps" class="btn btn-danger" href="proses_hapus_beli.php?id=<?php echo $baris['id']; ?>" onclick="return confirm('Anda yakin membatalkan pembelian <?php echo $baris['id']; ?>?')">Batal</a>
+															<a id="hps" class="btn btn-danger" href="proses_hapus_beli.php?id=<?php echo $baris['id']; ?>" onclick="return confirm('Anda yakin membatalkan pembelian <?php echo $baris['id']; ?>?')"><i class="fa fa-trash"></i></a>
 															</td>
 														</tr>
 													</tbody>
@@ -216,15 +217,21 @@ function format_ribuan($nilai)
 											</table>
 										</div>
 										<div class="row" style="margin:15px;">
-
 											<div class="form-group col-lg-6 col-md-6">
 												<button id="simpan" type="submit" class="btn btn-primary btn-lg btn-block">Simpan</button>
 											</div>
+											<?php 
+											$query = "SELECT sum(subtotal) as subtotal from detail_transaksi where no_transaksi='$noTransaksi'";
+											$result = mysqli_query($koneksi, $query);
+											while ($row = mysqli_fetch_array($result)){
+											?>
 											<div class="form-group col-lg-6 col-md-6 text-center">
-												<div class="form-group">
-													<input type="text" class="form-control" name="total" placeholder="Total" readonly>
-												</div>
+												<table width="100%">
+													<td><button class="left btn btn-light">Total</button></td>
+													<td><input type="text" class="form-control text-center" name="total" placeholder="Total" value="<?php echo $row['subtotal']?>" readonly></td>
+												</table>
 											</div>
+											<?php } ?>
 										</div>
 									</form>
 								</div>
@@ -276,6 +283,18 @@ function format_ribuan($nilai)
 			});
 		});
 	</script>
+	<!-- validasi angka -->
+    <script>
+        function hanyaAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                alert("Hanya diisi oleh Angka!");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </body>
 
 </html>

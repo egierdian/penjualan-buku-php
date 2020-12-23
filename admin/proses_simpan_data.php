@@ -3,9 +3,14 @@ include 'konfig.php';
 
 $idtransaksi = $_POST['notransaksi'];
 $tanggal = $_POST['tanggal'];
-// $total = $_POST['total'];
+$total = $_POST['total'];
 
-$query = "INSERT INTO head_transaksi VALUES ('$idtransaksi','$tanggal','4929429')";
-mysqli_query($koneksi, $query);
-
+if($idtransaksi == "" || $tanggal == "" || $total ==""){
+    echo "<script> 
+        alert('Lengkapi data');
+    </script>";
+} else {
+    $query = "INSERT INTO head_transaksi VALUES ('$idtransaksi','$tanggal','$total')";
+    mysqli_query($koneksi, $query);
+}
 ?>

@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 
 
 <head>
-    <title>Tables | Klorofil - Free Bootstrap Dashboard Template</title>
+    <title>Erdian-Books | Aplikasi Sistem Administrasi Penjualan Buku</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -61,7 +61,7 @@ if (isset($_GET['id'])) {
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="brand">
-                <a href="index.html"><img src="../assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+                <a href="index.php"><img src="../assets/img/logo.png" alt="Erdian-Books" class="img-responsive logo"></a>
             </div>
             <div class="container-fluid">
                 <div class="navbar-btn">
@@ -92,8 +92,8 @@ if (isset($_GET['id'])) {
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                        <li><a href="buku.php" class=""><i class="lnr lnr-file-empty"></i> <span>Buku</span></a></li>
+                        <li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                        <li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
                         <li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
                         <li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
@@ -120,32 +120,32 @@ if (isset($_GET['id'])) {
                                     <form class="form-auth-small" action="proses_ubah.php" method="post" enctype="multipart/form-data">
                                         <input name="id" value="<?php echo $data['ID']; ?>"  hidden />
                                         <div class="form-group">
-                                            <label for="Judul" class="control-label sr-only">Penerbit</label>
+                                            <label>Judul</label>
                                             <input type="text" id="Judul" class="form-control" name="judul" placeholder="Judul" value="<?php echo $data['judul']; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="penerbit" class="control-label sr-only">Penerbit</label>
+                                            <label>Penerbit</label>
                                             <input type="text" id="penerbit" class="form-control" name="penerbit" placeholder="Penerbit" value="<?php echo $data['penerbit']; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="pengarang" class="control-label sr-only">Pengarang</label>
+                                            <label>Pengarang</label>
                                             <input type="text" id="pengarang" class="form-control" name="pengarang" placeholder="Pengarang" value="<?php echo $data['pengarang']; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="tahun" class="control-label sr-only">Tahun</label>
-                                            <input type="text" id="tahun" class="form-control" name="tahun" placeholder="Tahun" value="<?php echo $data['tahun_terbit']; ?>">
+                                            <label>Tahun</label>
+                                            <input type="text" id="tahun" class="form-control" name="tahun" onkeypress="return hanyaAngka(event)" placeholder="Tahun" value="<?php echo $data['tahun_terbit']; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="harga" class="control-label sr-only">Harga</label>
-                                            <input type="text" id="harga" class="form-control" name="harga" placeholder="Harga" value="<?php echo $data['harga']; ?>">
+                                            <label>Harga</label>
+                                            <input type="text" id="harga" class="form-control" name="harga" onkeypress="return hanyaAngka(event)" placeholder="Harga" value="<?php echo $data['harga']; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="stok" class="control-label sr-only">Stok</label>
-                                            <input type="text" id="stok" class="form-control" name="stok" placeholder="Stok" value="<?php echo $data['stok']; ?>">
+                                            <label>Stok</label>
+                                            <input type="text" id="stok" class="form-control" name="stok" onkeypress="return hanyaAngka(event)" placeholder="Stok" value="<?php echo $data['stok']; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Gambar Produk</label>
-                                            <img src="../gambar/<?php echo $data['gambar']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                            <img src="../gambar/<?php echo $data['gambar']; ?>" style="width: 150px; height:150px; float: left; margin: 15px;">
           
                                             <input type="file" name="gambar_produk" /><br>
                                         </div>
@@ -175,6 +175,17 @@ if (isset($_GET['id'])) {
     <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="../assets/scripts/klorofil-common.js"></script>
-    
+    <!-- validasi angka -->
+    <script>
+        function hanyaAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                alert("Hanya diisi oleh Angka!");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </body>
 </html>

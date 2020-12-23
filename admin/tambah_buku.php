@@ -7,7 +7,7 @@ include 'cek.php';
 ?>
 
 <head>
-    <title>Tables | Klorofil - Free Bootstrap Dashboard Template</title>
+    <title>Erdian-Books | Aplikasi Sistem Administrasi Penjualan Buku</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -24,6 +24,8 @@ include 'cek.php';
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="../assets/img/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -32,7 +34,7 @@ include 'cek.php';
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="brand">
-                <a href="index.php"><img src="../assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+                <a href="index.php"><img src="../assets/img/logo.png" alt="Erdian-Books" class="img-responsive logo"></a>
             </div>
             <div class="container-fluid">
                 <div class="navbar-btn">
@@ -63,8 +65,8 @@ include 'cek.php';
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                        <li><a href="buku.php" class=""><i class="lnr lnr-file-empty"></i> <span>Buku</span></a></li>
+                        <li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                        <li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
                         <li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
                         <li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
@@ -89,31 +91,32 @@ include 'cek.php';
                                     <h3 class="panel-title">Silahkan isi data</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form class="form-auth-small" action="proses_tambah.php" method="post" enctype="multipart/form-data">
+                                    <form class="form-auth-small" method="post" action="proses_tambah.php" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="Judul" class="control-label sr-only">Judul</label>
-                                            <input type="text" id="Judul" class="form-control" name="judul" placeholder="Judul">
+                                            <label>Judul</label>
+                                            <input type="text" id="Judul" class="form-control" name="judul" placeholder="Judul" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="penerbit" class="control-label sr-only">Penerbit</label>
-                                            <input type="text" id="penerbit" class="form-control" name="penerbit" placeholder="Penerbit">
+                                            <label>Penerbit</label>
+                                            <input type="text" id="penerbit" class="form-control" name="penerbit" placeholder="Penerbit" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="pengarang" class="control-label sr-only">Pengarang</label>
-                                            <input type="text" id="pengarang" class="form-control" name="pengarang" placeholder="Pengarang">
+                                            <label>Pengarang</label>
+                                            <input type="text" id="pengarang" class="form-control" name="pengarang" placeholder="Pengarang" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="tahun" class="control-label sr-only">Tahun</label>
-                                            <input type="text" id="tahun" class="form-control" name="tahun" placeholder="Tahun">
+                                            <label>Tahun</label>
+                                            <input type="text" id="tahun" class="form-control" name="tahun" onkeypress="return hanyaAngka(event)" placeholder="Tahun" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="harga" class="control-label sr-only">Harga</label>
-                                            <input type="text" id="harga" class="form-control" name="harga" placeholder="Harga">
+                                            <label>Harga</label>
+                                            <input type="text" id="harga" class="form-control" name="harga" onkeypress="return hanyaAngka(event)" placeholder="Harga" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="stok" class="control-label sr-only">Stok</label>
-                                            <input type="text" id="stok" class="form-control" name="stok" placeholder="Stok">
+                                            <label>Stok</label>
+                                            <input type="text" id="stok" class="form-control" name="stok" onkeypress="return hanyaAngka(event)" placeholder="Stok" required="">
                                         </div>
+
                                         <div class="form-group">
                                             <label>Gambar Produk</label>
 
@@ -145,6 +148,33 @@ include 'cek.php';
     <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="../assets/scripts/klorofil-common.js"></script>
-    
+    <!-- <script type="text/javascript">
+		$(document).ready(function() {
+			$("#simpan").click(function() {
+				var data = $('.form-auth-small').serialize();
+				$.ajax({
+					type: 'POST',
+					url: "proses_tambah.php",
+					data: data,
+					success: function() {
+						// $('.dataBeli').load("tampil_data.php");
+					}
+				});
+			});
+		});
+	</script> -->
+    <!-- validasi angka -->
+    <script>
+        function hanyaAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                alert("Hanya diisi oleh Angka!");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </body>
+
 </html>

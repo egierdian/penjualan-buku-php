@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-	<title>adminBook | Aplikasi penjualan buku</title>
+    <title>Erdian-Books | Aplikasi Sistem Administrasi Penjualan Buku</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -44,8 +44,8 @@
 					<div class="left">
 						<div class="content">
 							<div class="header">
-								<div class="logo text-center"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"></div>
-								<p class="lead">Login to your account</p>
+								<div class="logo text-center"><img src="assets/img/logo.png" alt="Erdian Books"></div>
+								<p class="lead">Silahkan masukkan username dan password</p>
 							</div>
 							<form class="form-auth-small" action="cek_login.php" method="post">
 								<div class="form-group">
@@ -72,8 +72,8 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Free Bootstrap dashboard template</h1>
-							<p>by The Develovers</p>
+							<h1 class="heading">Aplikasi Sistem Administrasi Penjualan Buku</h1>
+							<p>by Erdian</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>
