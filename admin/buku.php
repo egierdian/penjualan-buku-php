@@ -129,7 +129,7 @@ function rupiah($nilai)
                                                 $limitStart = ($page - 1) * $limit;
 
                                                 //menampung variabel kata_cari dari form pencarian
-                                                $kata_cari = $_GET['kata_cari'];
+                                                $kata_cari =(isset($_GET['kata_cari']))? $_GET['kata_cari'] : "";
 
                                                 //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
                                                 //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
@@ -183,21 +183,34 @@ function rupiah($nilai)
                                             ?>
                                                 <!-- link Previous Page disable -->
                                                 <li class="disabled"><a href="#">Previous</a></li>
-                                            <?php
+                                                <?php
                                             } else {
                                                 $LinkPrev = ($page > 1) ? $page - 1 : 1;
-                                            ?>
-                                                <!-- link Previous Page -->
-                                                <li><a href="buku.php?page=<?php echo $LinkPrev; ?>">Previous</a></li>
+                                                $kata_cari =(isset($_GET['kata_cari']))? $_GET['kata_cari'] : "";
+                                                if ($kata_cari == "") {
+                                                ?>
+                                                    <li><a href="buku.php?page=<?php echo $LinkPrev; ?>">Previous</a></li>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <li><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $LinkPrev; ?>">Previous</a></li>
                                             <?php
+                                                }
                                             }
                                             ?>
 
                                             <?php
-                                            $result = mysqli_query($koneksi, "SELECT * FROM buku");
+                                            $kata_cari =(isset($_GET['kata_cari']))? $_GET['kata_cari'] : "";
+                                            //kondisi jika parameter pencarian kosong
+                                            if ($kata_cari == "" ) {
+                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM buku");
+                                            } else {
+                                                //kondisi jika parameter kolom pencarian diisi
+                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM buku WHERE judul LIKE '%$kata_cari%' OR pengarang LIKE '%$kata_cari%' OR penerbit LIKE '%$kata_cari%'");
+                                            }
 
                                             //Hitung semua jumlah data yang berada pada tabel Sisawa
-                                            $JumlahData = mysqli_num_rows($result);
+                                            $JumlahData = mysqli_num_rows($SqlQuery);
 
                                             // Hitung jumlah halaman yang tersedia
                                             $jumlahPage = ceil($JumlahData / $limit);
@@ -213,25 +226,39 @@ function rupiah($nilai)
 
                                             for ($i = $startNumber; $i <= $endNumber; $i++) {
                                                 $linkActive = ($page == $i) ? ' class="active"' : '';
-                                            ?>
-                                                <li<?php echo $linkActive; ?>><a href="buku.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                                                <?php
-                                            }
-                                                ?>
 
-                                                <!-- link Next Page -->
-                                                <?php
-                                                if ($page >= $jumlahPage) {
-                                                ?>
-                                                    <li class="disabled"><a href="#">Next</a></li>
-                                                <?php
+                                                if ($kata_cari == "") {
+                                            ?>
+                                                    <li<?php echo $linkActive; ?>><a href="buku.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+                                                    <?php
                                                 } else {
-                                                    $linkNext = ($page < $jumlahPage) ? $page + 1 : $jumlahPage;
-                                                ?>
-                                                    <li><a href="buku.php?page=<?php echo $linkNext; ?>">Next</a></li>
-                                                <?php
+                                                    ?>
+                                                        <li<?php echo $linkActive; ?>><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                                    <?php
                                                 }
-                                                ?>
+                                            }
+                                                    ?>
+
+                                                    <!-- link Next Page -->
+                                                    <?php
+                                                    if ($page == $jumlahPage) {
+                                                    ?>
+                                                        <li class="disabled"><a href="#">Next</a></li>
+                                                        <?php
+                                                    } else {
+                                                        $linkNext = ($page < $jumlahPage) ? $page + 1 : $jumlahPage;
+                                                        if ($kata_cari == "") {
+                                                        ?>
+                                                            <li><a href="buku.php?page=<?php echo $linkNext; ?>">Next</a></li>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <li><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $linkNext; ?>">Next</a></li>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                         </ul>
                                     </div>
                                 </div>
