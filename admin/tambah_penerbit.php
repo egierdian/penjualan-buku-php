@@ -44,7 +44,7 @@ include 'cek.php';
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">  <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                                 <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -80,7 +80,7 @@ include 'cek.php';
             <!-- MAIN CONTENT -->
             <div class="main-content">
                 <div class="container-fluid">
-                    <h3 class="page-title">Tambah Buku</h3>
+                    <h3 class="page-title">Tambah Penerbit</h3>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -92,53 +92,10 @@ include 'cek.php';
                                     <h3 class="panel-title">Silahkan isi data</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form class="form-auth-small" method="post" action="proses_tambah.php" enctype="multipart/form-data">
+                                    <form class="form-auth-small" method="post" action="proses_tambah_penerbit.php">
                                         <div class="form-group">
-                                            <label>Judul</label>
-                                            <input type="text" id="Judul" class="form-control" name="judul" placeholder="Judul" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Penerbit</label>
-                                            <select class="form-control" name="id_penerbit">
-                                                <option value="0">-- Penerbit --</option>
-                                                <?php
-                                                //Perintah sql untuk menampilkan semua data pada tabel jurusan
-                                                $queryJudul = "select * from penerbit ORDER BY nama_penerbit asc";
-
-                                                $hasilJudul = mysqli_query($koneksi, $queryJudul);
-                                                $jsArray = "var data = new Array();\n";
-                                                // $nomorJudul = 0;
-                                                while ($data = mysqli_fetch_array($hasilJudul)) {
-                                                    // $nomorJudul++;
-                                                    // $jsArray .= "data['" . $data['ID'] . "'] = {nama_jurusan:'" . addslashes($data['nama_jurusan']) . "',ID:'" . addslashes($data['ID']) . "'};\n";
-                                                ?>
-                                                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama_penerbit']; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Pengarang</label>
-                                            <input type="text" id="pengarang" class="form-control" name="pengarang" placeholder="Pengarang" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tahun</label>
-                                            <input type="text" id="tahun" class="form-control" name="tahun" onkeypress="return hanyaAngka(event)" placeholder="Tahun" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Harga</label>
-                                            <input type="text" id="harga" class="form-control" name="harga" onkeypress="return hanyaAngka(event)" placeholder="Harga" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Stok</label>
-                                            <input type="text" id="stok" class="form-control" name="stok" onkeypress="return hanyaAngka(event)" placeholder="Stok" required="">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Gambar Produk</label>
-
-                                            <input type="file" name="gambar_produk" /><br>
+                                            <label>Nama Penerbit</label>
+                                            <input type="text" id="nama_penerbit" class="form-control" name="nama_penerbit" placeholder="Nama Penerbit" required="">
                                         </div>
                                         <button id="simpan" type="submit" class="btn btn-primary btn-lg btn-block">Simpan</button>
                                     </form>
@@ -166,33 +123,6 @@ include 'cek.php';
     <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="../assets/scripts/klorofil-common.js"></script>
-    <!-- <script type="text/javascript">
-		$(document).ready(function() {
-			$("#simpan").click(function() {
-				var data = $('.form-auth-small').serialize();
-				$.ajax({
-					type: 'POST',
-					url: "proses_tambah.php",
-					data: data,
-					success: function() {
-						// $('.dataBeli').load("tampil_data.php");
-					}
-				});
-			});
-		});
-	</script> -->
-    <!-- validasi angka -->
-    <script>
-        function hanyaAngka(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                alert("Hanya diisi oleh Angka!");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </body>
 
 </html>

@@ -68,8 +68,8 @@ function rupiah($nilai)
                 <nav>
                     <ul class="nav">
                         <li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                        <li><a href="buku.php" class="active"><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
-						<li><a href="penerbit.php" class=""><i class="lnr lnr-book"></i> <span>Penerbit</span></a></li>
+                        <li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
+                        <li><a href="penerbit.php" class="active"><i class="lnr lnr-book"></i> <span>Penerbit</span></a></li>
                         <li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
                         <li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
@@ -82,15 +82,15 @@ function rupiah($nilai)
             <!-- MAIN CONTENT -->
             <div class="main-content">
                 <div class="container-fluid">
-                    <h3 class="page-title">Data Buku</h3>
+                    <h3 class="page-title">Data Penerbit</h3>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- TABLE HOVER -->
                             <div class="panel">
                                 <div class="panel-heading">
                                     <div class="col-md-6 col-12" style="margin-left:-15px;  padding-bottom:10px;">
-                                        <a class="text-left btn btn-primary" href="tambah_buku.php">
-                                            <h3 class="panel-title"><i class="fa fa-plus-circle"></i> Tambah Buku</h3>
+                                        <a class="text-left btn btn-primary" href="tambah_penerbit.php">
+                                            <h3 class="panel-title"><i class="fa fa-plus-circle"></i> Tambah Penerbit</h3>
                                         </a>
 
                                     </div>
@@ -109,10 +109,7 @@ function rupiah($nilai)
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Judul</th>
-                                                <th>Tahun</th>
-                                                <th>Harga</th>
-                                                <th style="text-align: center;">Gambar</th>
+                                                <th>Nama Penerbit</th>
                                                 <th style="text-align: center; width: 200px;">Aksi</th>
                                             </tr>
                                         </thead>
@@ -134,7 +131,7 @@ function rupiah($nilai)
 
                                                 //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
                                                 //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
-                                                $result = mysqli_query($koneksi, "SELECT * FROM buku WHERE judul like '%" . $kata_cari . "%' OR penerbit like '%" . $kata_cari . "%' OR pengarang like '%" . $kata_cari . "%' LIMIT " . $limitStart . "," . $limit);
+                                                $result = mysqli_query($koneksi, "SELECT * FROM penerbit WHERE nama_penerbit like '%" . $kata_cari . "%' LIMIT " . $limitStart . "," . $limit);
 
                                                 $no = $limitStart + 1;
                                             } else {
@@ -147,7 +144,7 @@ function rupiah($nilai)
 
                                                 $limitStart = ($page - 1) * $limit;
 
-                                                $result = mysqli_query($koneksi, "SELECT * FROM buku LIMIT " . $limitStart . "," . $limit);
+                                                $result = mysqli_query($koneksi, "SELECT * FROM penerbit LIMIT " . $limitStart . "," . $limit);
 
                                                 $no = $limitStart + 1;
                                             }
@@ -159,14 +156,10 @@ function rupiah($nilai)
 
                                                 <tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $row['judul']; ?></td>
-                                                    <td><?php echo $row['tahun_terbit']; ?></td>
-                                                    <td><?php echo "Rp " . rupiah($row['harga']); ?></td>
-
-                                                    <td style="text-align: center;"><img src="../gambar/<?php echo $row['gambar']; ?>" style="width: 150px; height:150px;"></td>
+                                                    <td><?php echo $row['nama_penerbit']; ?></td>
                                                     <td style="width: 200px; text-align:center;">
-                                                        <a class="btn btn-warning" href="edit_buku.php?id=<?php echo $row['id']; ?>"><i class="fa fa-edit"></i></a>
-                                                        <a class="btn btn-danger" href="proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data?')"><i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-warning" href="edit_penerbit.php?id=<?php echo $row['id']; ?>"><i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-danger" href="proses_hapus_penerbit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data?')"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
 
@@ -190,11 +183,11 @@ function rupiah($nilai)
                                                 $kata_cari =(isset($_GET['kata_cari']))? $_GET['kata_cari'] : "";
                                                 if ($kata_cari == "") {
                                                 ?>
-                                                    <li><a href="buku.php?page=<?php echo $LinkPrev; ?>">Previous</a></li>
+                                                    <li><a href="penerbit.php?page=<?php echo $LinkPrev; ?>">Previous</a></li>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <li><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $LinkPrev; ?>">Previous</a></li>
+                                                    <li><a href="penerbit.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $LinkPrev; ?>">Previous</a></li>
                                             <?php
                                                 }
                                             }
@@ -204,10 +197,10 @@ function rupiah($nilai)
                                             $kata_cari =(isset($_GET['kata_cari']))? $_GET['kata_cari'] : "";
                                             //kondisi jika parameter pencarian kosong
                                             if ($kata_cari == "" ) {
-                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM buku");
+                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM penerbit");
                                             } else {
                                                 //kondisi jika parameter kolom pencarian diisi
-                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM buku WHERE judul LIKE '%$kata_cari%' OR pengarang LIKE '%$kata_cari%' OR penerbit LIKE '%$kata_cari%'");
+                                                $SqlQuery = mysqli_query($koneksi, "SELECT * FROM penerbit WHERE nama_penerbit LIKE '%$kata_cari%'");
                                             }
 
                                             //Hitung semua jumlah data yang berada pada tabel Sisawa
@@ -230,12 +223,12 @@ function rupiah($nilai)
 
                                                 if ($kata_cari == "") {
                                             ?>
-                                                    <li<?php echo $linkActive; ?>><a href="buku.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                                    <li<?php echo $linkActive; ?>><a href="penerbit.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
 
                                                     <?php
                                                 } else {
                                                     ?>
-                                                        <li<?php echo $linkActive; ?>><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                                        <li<?php echo $linkActive; ?>><a href="penerbit.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                                                     <?php
                                                 }
                                             }
@@ -251,11 +244,11 @@ function rupiah($nilai)
                                                         $linkNext = ($page < $jumlahPage) ? $page + 1 : $jumlahPage;
                                                         if ($kata_cari == "") {
                                                         ?>
-                                                            <li><a href="buku.php?page=<?php echo $linkNext; ?>">Next</a></li>
+                                                            <li><a href="penerbit.php?page=<?php echo $linkNext; ?>">Next</a></li>
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <li><a href="buku.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $linkNext; ?>">Next</a></li>
+                                                            <li><a href="penerbit.php?kata_cari=<?php echo $kata_cari; ?>&page=<?php echo $linkNext; ?>">Next</a></li>
                                                     <?php
                                                         }
                                                     }

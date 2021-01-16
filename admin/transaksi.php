@@ -50,7 +50,7 @@ function rupiah($nilai)
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../assets/img/user.png" class="img-circle" alt="Avatar"> <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">  <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -73,6 +73,7 @@ function rupiah($nilai)
 					<ul class="nav">
 						<li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="buku.php" class=""><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
+						<li><a href="penerbit.php" class=""><i class="lnr lnr-book"></i> <span>Penerbit</span></a></li>
 						<li><a href="transaksi.php" class="active"><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
 						<li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 					</ul>
@@ -124,16 +125,16 @@ function rupiah($nilai)
 												<option value="0">-- Pilih --</option>
 												<?php
 												//Perintah sql untuk menampilkan semua data pada tabel jurusan
-												$queryJudul = "select * from buku ORDER BY judul asc";
+												$queryJudul = "select * from buku inner join penerbit on buku.id_penerbit = penerbit.id ORDER BY judul asc";
 
 												$hasilJudul = mysqli_query($koneksi, $queryJudul);
 												$jsArray = "var dataBuku = new Array();\n";
 												$nomorJudul = 0;
 												while ($data = mysqli_fetch_array($hasilJudul)) {
 													$nomorJudul++;
-													$jsArray .= "dataBuku['" . $data['ID'] . "'] = {pengarang:'" . addslashes($data['pengarang']) . "',penerbit:'" . addslashes($data['penerbit']) . "',harga:'" . addslashes($data['harga']) . "',ID:'" . addslashes($data['ID']) . "'};\n";
+													$jsArray .= "dataBuku['" . $data['id'] . "'] = {pengarang:'" . addslashes($data['pengarang']) . "',nama_penerbit:'" . addslashes($data['nama_penerbit']) . "',harga:'" . addslashes($data['harga']) . "',id:'" . addslashes($data['id']) . "'};\n";
 												?>
-													<option value="<?php echo $data['ID']; ?>"><?php echo $data['judul']; ?></option>
+													<option value="<?php echo $data['id']; ?>"><?php echo $data['judul']; ?></option>
 												<?php
 												}
 												?>
@@ -143,18 +144,18 @@ function rupiah($nilai)
 											<?php echo $jsArray; ?>
 
 											function changeValue(ID) {
-												document.getElementById('pengarang').value = dataBuku[ID].pengarang;
-												document.getElementById('penerbit').value = dataBuku[ID].penerbit;
+												document.getElementById('nama_pengarang').value = dataBuku[ID].pengarang;
+												document.getElementById('nama_penerbit').value = dataBuku[ID].nama_penerbit;
 												document.getElementById('harga').value = dataBuku[ID].harga;
 											};
 										</script>
 										<div class="form-group col-lg-6">
 											<label>Pengarang</label>
-											<input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" readonly required="">
+											<input type="text" class="form-control" id="nama_pengarang" name="nama_pengarang" placeholder="Pengarang" readonly required="">
 										</div>
 										<div class="form-group col-lg-6">
 											<label>Penerbit</label>
-											<input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Penerbit" readonly required="">
+											<input type="text" class="form-control" id="nama_penerbit" name="nama_penerbit" placeholder="Penerbit" readonly required="">
 										</div>
 										<div class="form-group col-lg-6">
 											<label>Harga</label>

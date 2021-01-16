@@ -11,24 +11,24 @@ if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
 
     // menampilkan data dari database yang mempunyai id=$id
-    $query = "SELECT * FROM buku WHERE id='$id'";
+    $query = "SELECT * FROM penerbit WHERE id='$id'";
     $result = mysqli_query($koneksi, $query);
     // jika data gagal diambil maka akan tampil error berikut
-    if (!$result) {
-        die("Error: " . mysqli_error($koneksi));
+    if(!$result){
+      die ("Error: ".mysqli_error($koneksi));
     }
     // mengambil data dari database
     $data = mysqli_fetch_assoc($result);
-    // apabila data tidak ada pada database maka akan dijalankan perintah ini
-    if (!count($data)) {
-        echo "<script>alert('Data tidak ditemukan pada database');
-          window.location='buku.php';</script>";
-    }
+      // apabila data tidak ada pada database maka akan dijalankan perintah ini
+       if (!count($data)) {
+          echo "<script>alert('Data tidak ditemukan pada database');
+          window.location='penerbit.php';</script>";
+       }
 } else {
     // apabila tidak ada data GET id pada akan di redirect ke index.php
     echo "<script>alert('Masukkan data id.');
-    window.location='buku.php';</script>";
-}
+    window.location='penerbit.php';</script>";
+}         
 ?>
 
 <!doctype html>
@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">  <span><?php echo $_SESSION['nama']  ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                                 <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
             <!-- MAIN CONTENT -->
             <div class="main-content">
                 <div class="container-fluid">
-                    <h3 class="page-title">Edit Buku</h3>
+                    <h3 class="page-title">Edit Penerbit</h3>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- TABLE HOVER -->
@@ -115,57 +115,14 @@ if (isset($_GET['id'])) {
                                 <!-- cek login -->
 
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Edit data <?php echo $data['judul']; ?></h3>
+                                    <h3 class="panel-title">Edit data <?php echo $data['nama_penerbit']; ?></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form class="form-auth-small" action="proses_ubah.php" method="post" enctype="multipart/form-data">
-                                        <input name="id" value="<?php echo $data['id']; ?>" hidden />
+                                    <form class="form-auth-small" action="proses_ubah_penerbit.php" method="post">
+                                        <input name="id" value="<?php echo $data['id']; ?>"  hidden />
                                         <div class="form-group">
-                                            <label>Judul</label>
-                                            <input type="text" id="Judul" class="form-control" name="judul" placeholder="Judul" value="<?php echo $data['judul']; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Penerbit</label>
-                                            <select class="form-control" name="id_penerbit">
-                                                <option value="0">-- Penerbit --</option>
-                                                <?php
-                                                //Perintah sql untuk menampilkan semua data pada tabel jurusan
-                                                $query_penerbit = "select * from penerbit ORDER BY nama_penerbit asc";
-
-                                                $hasil_penerbit = mysqli_query($koneksi, $query_penerbit);
-                                                // $jsArray = "var data = new Array();\n";
-                                                // $nomorJudul = 0;
-                                                while ($data_penerbit = mysqli_fetch_array($hasil_penerbit)) {
-                                                ?>
-                                                    <option value="<?php echo $data_penerbit['id']; ?>" <?php if ($data['id_penerbit'] == $data_penerbit['id']) {
-                                                                                                    echo "selected";
-                                                                                                } ?>><?php echo $data_penerbit['nama_penerbit']; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Pengarang</label>
-                                            <input type="text" id="pengarang" class="form-control" name="pengarang" placeholder="Pengarang" value="<?php echo $data['pengarang']; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tahun</label>
-                                            <input type="text" id="tahun" class="form-control" name="tahun" onkeypress="return hanyaAngka(event)" placeholder="Tahun" value="<?php echo $data['tahun_terbit']; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Harga</label>
-                                            <input type="text" id="harga" class="form-control" name="harga" onkeypress="return hanyaAngka(event)" placeholder="Harga" value="<?php echo $data['harga']; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Stok</label>
-                                            <input type="text" id="stok" class="form-control" name="stok" onkeypress="return hanyaAngka(event)" placeholder="Stok" value="<?php echo $data['stok']; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Gambar Produk</label>
-                                            <img src="../gambar/<?php echo $data['gambar']; ?>" style="width: 150px; height:150px; float: left; margin: 15px;">
-
-                                            <input type="file" name="gambar_produk" /><br>
+                                            <label>Nama Penerbit</label>
+                                            <input type="text" id="nama_penerbit" class="form-control" name="nama_penerbit" placeholder="Nama Penerbit" value="<?php echo $data['nama_penerbit']; ?>">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ubah</button>
                                     </form>
@@ -193,18 +150,5 @@ if (isset($_GET['id'])) {
     <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="../assets/scripts/klorofil-common.js"></script>
-    <!-- validasi angka -->
-    <script>
-        function hanyaAngka(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                alert("Hanya diisi oleh Angka!");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </body>
-
 </html>

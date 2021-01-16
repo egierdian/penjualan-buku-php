@@ -4,7 +4,7 @@ include 'konfig.php';
 
 // membuat variabel untuk menampung data dari form
 $judul   = $_POST['judul'];
-$penerbit   = $_POST['penerbit'];
+$penerbit   = $_POST['id_penerbit'];
 $pengarang   = $_POST['pengarang'];
 $tahun   = $_POST['tahun'];
 $harga   = $_POST['harga'];
@@ -28,7 +28,7 @@ if($judul == "" || $penerbit == "" || $pengarang== "" || $tahun == "" || $harga=
             $uploaded = "C:/xampp/htdocs/php/penjualan-buku/gambar/";
             move_uploaded_file($file_tmp, $uploaded.$nama_gambar_baru);
             // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-            $query = "INSERT INTO buku (judul, penerbit, pengarang, tahun_terbit, harga, stok, gambar) VALUES ('$judul', '$penerbit', '$pengarang', '$tahun', '$harga', '$stok','$nama_gambar_baru')";
+            $query = "INSERT INTO buku (judul, id_penerbit, pengarang, tahun_terbit, harga, stok, gambar) VALUES ('$judul', '$penerbit', '$pengarang', '$tahun', '$harga', '$stok','$nama_gambar_baru')";
             $result = mysqli_query($koneksi, $query);
             // periska query apakah ada error
             if (!$result) {
@@ -47,7 +47,7 @@ if($judul == "" || $penerbit == "" || $pengarang== "" || $tahun == "" || $harga=
             window.location='tambah_buku.php';</script>";
         }
     } else {
-        $query = "INSERT INTO buku (judul, penerbit, pengarang, tahun_terbit, harga, stok) VALUES ('$judul', '$penerbit', '$pengarang', '$tahun', '$harga', '$stok')";
+        $query = "INSERT INTO buku (judul, id_penerbit, pengarang, tahun_terbit, harga, stok) VALUES ('$judul', '$penerbit', '$pengarang', '$tahun', '$harga', '$stok')";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
         if (!$result) {
