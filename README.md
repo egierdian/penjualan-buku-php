@@ -30,16 +30,19 @@
 </ul>
 <br />
 <h5>Login</h5>
-<img src="https://user-images.githubusercontent.com/24710799/102681868-8b9d4700-41f7-11eb-8e0d-82c399b3a4e8.png">
-
-
+<img src="https://user-images.githubusercontent.com/24710799/104828144-ab786700-5898-11eb-9789-e33964a297fd.png">
+<br />
 <h5>Dashboard Admin</h5>
-<img src="https://user-images.githubusercontent.com/24710799/102681864-88a25680-41f7-11eb-84d8-3eee829158b7.png">
+<img src="https://user-images.githubusercontent.com/24710799/104828141-aa473a00-5898-11eb-9855-13fa8bd345fc.png">
 
 <h5>Kelola Buku</h5>
-<img src="https://user-images.githubusercontent.com/24710799/102681865-8a6c1a00-41f7-11eb-90a1-0112826d3622.png">
-<img src="https://user-images.githubusercontent.com/24710799/102681866-8b04b080-41f7-11eb-950e-9361456a73b1.png">
+<img src="(https://user-images.githubusercontent.com/24710799/104828140-a87d7680-5898-11eb-92ef-7af49423a74a.png">
 
 
 <h5>Transaksi</h5>
-<img src="https://user-images.githubusercontent.com/24710799/102681869-8c35dd80-41f7-11eb-93c0-aa2783434ff7.png">
+<img src="https://user-images.githubusercontent.com/24710799/104828146-ad422a80-5898-11eb-8c39-33bef17505f8.png">
+
+<h5>Laporan</h5>
+<img src="https://user-images.githubusercontent.com/24710799/104828143-ab786700-5898-11eb-94b0-c5e9fc6cc622.png">
+<img src="https://user-images.githubusercontent.com/24710799/104828142-aadfd080-5898-11eb-8f35-fc7ae27c3ca8.png">
+

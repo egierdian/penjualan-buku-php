@@ -69,6 +69,7 @@ include 'cek.php';
                         <li><a href="buku.php" class="active"><i class="lnr lnr-book"></i> <span>Buku</span></a></li>
 						<li><a href="penerbit.php" class=""><i class="lnr lnr-book"></i> <span>Penerbit</span></a></li>
                         <li><a href="transaksi.php" class=""><i class="lnr lnr-file-empty"></i> <span>Transaksi</span></a></li>
+                        <li><a href="laporan.php" class=""><i class="lnr lnr-file-empty"></i> <span>Laporan</span></a></li>
                         <li><a href="logout.php" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
                 </nav>
