@@ -23,10 +23,22 @@
     <li>Menghapus data buku</li>
     <li>Pencarian data buku</li>
 </ul>
+<h5>Kelola data Penerbit</h5>
+<ul>
+    <li>Melakukan penambahan data penerbit</li>
+    <li>Merubah data penerbit</li>
+    <li>Menghapus data penerbit</li>
+    <li>Pencarian data penerbit</li>
+</ul>
 <h5>Kelola Transaksi</h5>
 <ul>
     <li>Melakukan penambahan data transaksi</li>
     <li>Dapat menambahkan beberapa produk buku sekali transaksi</li>
+</ul>
+<h5>Laporan Transaksi</h5>
+<ul>
+    <li>Melihat transaksi</li>
+    <li>Melihat rincian per transaksi</li>
 </ul>
 <br />
 <h5>Login</h5>
@@ -36,8 +48,9 @@
 <img src="https://user-images.githubusercontent.com/24710799/104828141-aa473a00-5898-11eb-9855-13fa8bd345fc.png">
 
 <h5>Kelola Buku</h5>
-<img src="(https://user-images.githubusercontent.com/24710799/104828140-a87d7680-5898-11eb-92ef-7af49423a74a.png">
-
+<img src="https://user-images.githubusercontent.com/24710799/104828140-a87d7680-5898-11eb-92ef-7af49423a74a.png">
+<h5>Kelola Penerbit</h5>
+<img src="https://user-images.githubusercontent.com/24710799/104828145-aca99400-5898-11eb-9d59-44ee9e10520e.png">
 
 <h5>Transaksi</h5>
 <img src="https://user-images.githubusercontent.com/24710799/104828146-ad422a80-5898-11eb-8c39-33bef17505f8.png">
