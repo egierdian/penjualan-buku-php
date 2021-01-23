@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2021 at 02:39 PM
+-- Generation Time: Jan 23, 2021 at 12:20 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.33
 
@@ -78,7 +78,8 @@ INSERT INTO `detail_transaksi` (`ID`, `no_transaksi`, `ID_buku`, `harga`, `jumla
 (67, 'TRS003', 35, 215000, 22, 4730000),
 (68, 'TRS004', 37, 100000, 1, 100000),
 (63, 'TRS001', 36, 100000, 5, 500000),
-(62, 'TRS001', 34, 140000, 10, 1400000);
+(62, 'TRS001', 34, 140000, 10, 1400000),
+(70, 'TRS006', 5, 100000, 1, 100000);
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,7 @@ ALTER TABLE `buku`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `penerbit`
